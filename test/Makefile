@@ -68,6 +68,7 @@ SRPTEST=	srptest
 V3NAMETEST=	v3nametest
 HEARTBEATTEST=  heartbeat_test
 CONSTTIMETEST=  constant_time_test
+DSTUTEST=	dstutest
 
 TESTS=		alltests
 
@@ -78,6 +79,7 @@ EXE=	$(BNTEST)$(EXE_EXT) $(ECTEST)$(EXE_EXT)  $(ECDSATEST)$(EXE_EXT) $(ECDHTEST)
 	$(MDC2TEST)$(EXE_EXT) $(RMDTEST)$(EXE_EXT) \
 	$(RANDTEST)$(EXE_EXT) $(DHTEST)$(EXE_EXT) $(ENGINETEST)$(EXE_EXT) \
 	$(GOST2814789TEST)$(EXE_EXT) \
+	$(DSTUTEST)$(EXE_EXT) \
 	$(BFTEST)$(EXE_EXT) $(CASTTEST)$(EXE_EXT) $(SSLTEST)$(EXE_EXT) \
 	$(EXPTEST)$(EXE_EXT) $(DSATEST)$(EXE_EXT) $(RSATEST)$(EXE_EXT) \
 	$(EVPTEST)$(EXE_EXT) $(IGETEST)$(EXE_EXT) $(JPAKETEST)$(EXE_EXT) $(SRPTEST)$(EXE_EXT) \
@@ -96,7 +98,7 @@ OBJ=	$(BNTEST).o $(ECTEST).o  $(ECDSATEST).o $(ECDHTEST).o $(IDEATEST).o \
 	$(BFTEST).o  $(SSLTEST).o  $(DSATEST).o  $(EXPTEST).o $(RSATEST).o \
 	$(EVPTEST).o $(IGETEST).o $(JPAKETEST).o $(V3NAMETEST).o \
 	$(GOST2814789TEST).o $(HEARTBEATTEST).o $(P5_CRPT2_TEST).o \
-	$(CONSTTIMETEST).o testutil.o
+	$(DSTUTEST).o $(CONSTTIMETEST).o testutil.o
 
 SRC=	$(BNTEST).c $(ECTEST).c  $(ECDSATEST).c $(ECDHTEST).c $(IDEATEST).c \
 	$(MD2TEST).c  $(MD4TEST).c $(MD5TEST).c \
@@ -107,7 +109,7 @@ SRC=	$(BNTEST).c $(ECTEST).c  $(ECDSATEST).c $(ECDHTEST).c $(IDEATEST).c \
 	$(BFTEST).c  $(SSLTEST).c $(DSATEST).c   $(EXPTEST).c $(RSATEST).c \
 	$(EVPTEST).c $(IGETEST).c $(JPAKETEST).c $(V3NAMETEST).c \
 	$(GOST2814789TEST).c $(HEARTBEATTEST).c $(P5_CRPT2_TEST).c \
-	$(CONSTTIMETEST).c testutil.c
+	$(DSTUTEST).c $(CONSTTIMETEST).c testutil.c
 
 EXHEADER= 
 HEADER=	testutil.h $(EXHEADER)
@@ -154,7 +156,7 @@ alltests: \
 	test_ss test_ca test_engine test_evp test_ssl test_tsa test_ige \
 	test_jpake test_srp test_cms test_v3name test_ocsp \
 	test_gost2814789 test_heartbeat test_p5_crpt2 \
-	test_constant_time
+	test_dstu test_constant_time
 
 test_evp: $(EVPTEST)$(EXE_EXT) evptests.txt
 	../util/shlib_wrap.sh ./$(EVPTEST) evptests.txt
@@ -350,6 +352,9 @@ test_constant_time: $(CONSTTIMETEST)$(EXE_EXT)
 	@echo "Test constant time utilites"
 	../util/shlib_wrap.sh ./$(CONSTTIMETEST)
 
+test_dstu: $(DSTUTEST)
+	../util/shlib_wrap.sh ./$(DSTUTEST)
+
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
@@ -485,6 +490,9 @@ $(DESTEST)$(EXE_EXT): $(DESTEST).o $(DLIBCRYPTO)
 
 $(GOST2814789TEST)$(EXE_EXT): $(GOST2814789TEST).o $(DLIBCRYPTO)
 	@target=$(GOST2814789TEST); $(BUILD_CMD)
+
+$(DSTUTEST)$(EXE_EXT): $(DSTUTEST).o $(DLIBCRYPTO)
+	@target=$(DSTUTEST); $(BUILD_CMD)
 
 $(RANDTEST)$(EXE_EXT): $(RANDTEST).o $(DLIBCRYPTO)
 	@target=$(RANDTEST); $(BUILD_CMD)

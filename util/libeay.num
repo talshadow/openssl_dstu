@@ -4545,3 +4545,4 @@ BN_GENCB_get_arg                        4904	EXIST::FUNCTION:
 BN_zero_ex                              4905	EXIST::FUNCTION:
 BN_is_odd                               4906	EXIST::FUNCTION:
 BN_set_flags                            4907	EXIST::FUNCTION:
+ENGINE_load_dstu                        4908	EXIST::FUNCTION:DSTU,ENGINE,STATIC_ENGINE

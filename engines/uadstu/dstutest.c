@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 #include <openssl/conf.h>
 #include <openssl/crypto.h>
 #include <openssl/engine.h>
+#include <openssl/rand.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/hmac.h>
@@ -129,7 +130,7 @@ static ENGINE* load_dstu(void)
 	return 0;
 
 #ifndef OPENSSL_NO_DYNAMIC_ENGINE
-#ifdef WIN32
+#ifdef _WIN32
     SetEnvironmentVariable("OPENSSL_ENGINES", UADSTU_DIR);	
 #else
     setenv("OPENSSL_ENGINES", UADSTU_DIR, 1);

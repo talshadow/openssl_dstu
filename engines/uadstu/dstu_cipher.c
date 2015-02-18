@@ -54,7 +54,7 @@ static int dstu_cipher_do_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
 
     if (ctx->num)
 	{
-	to_use = (ctx->num < inl) ? ctx->num : inl;
+	to_use = ((size_t)ctx->num < inl) ? ctx->num : inl;
 
 	for (i = 0; i < to_use; i++)
 	    {

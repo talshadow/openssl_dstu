@@ -104,7 +104,7 @@ static int dstu_rbg_bytes(unsigned char *buf, int num)
 	    rv = 0;
 	}
 
-    for (i = 0; i < num; i++)
+    for (i = 0; i < (u4)num; i++)
 	{
 	*(buf + i) = 0;
 	for (j = 0; j < 8; j++)
@@ -137,5 +137,5 @@ RAND_METHOD dstu_rand_meth =
 	    dstu_rbg_cleanup,
 	    dstu_rbg_add,
 	    dstu_rbg_bytes,
-	    dstu_rbg_status,
+	    dstu_rbg_status
     };

@@ -5,6 +5,7 @@
 
 #include "dstu_engine.h"
 #include "dstu_params.h"
+#include <openssl/rand.h>
 #include "../ccgost/gost89.h"
 #include <time.h>
 

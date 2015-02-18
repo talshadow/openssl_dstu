@@ -7,6 +7,7 @@
 #define DSTU_PARAMS_H_
 
 #include <openssl/ec.h>
+#include <openssl/bn.h>
 #include "../ccgost/gost89.h"
 
 #define DEFAULT_CURVE 6
